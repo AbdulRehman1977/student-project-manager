@@ -14,6 +14,16 @@ export const getProjects = async (req, res) => {
     }
 };
 
+// GET /api/projects/:id/tasks
+export const getProjectTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({ projectId: req.params.id });
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch tasks" });
+  }
+};
+
 
 // POST /api/projects
 export const createProject = async (req,res) => {

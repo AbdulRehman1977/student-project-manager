@@ -16,9 +16,26 @@ Students struggle to organize multiple course projects and deadlines.
 2. cd backend → npm install → npm run dev
 3. cd frontend → npm install → npm run dev
 
-## API Example
-GET /api/projects → returns all projects  
-POST /api/projects → creates project
+
+## API Endpoints
+
+GET /api/projects  
+→ Returns all projects
+
+POST /api/projects  
+→ Creates a new project
+
+PUT /api/projects/:id  
+→ Updates a project
+
+DELETE /api/projects/:id  
+→ Deletes a project
+
+GET /api/projects/:id/tasks  
+→ Returns tasks for a project
+
+GET /api/projects/stats/summary  
+→ Returns project statistics
 
 ## Features
 - Create, update, delete projects

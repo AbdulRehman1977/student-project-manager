@@ -82,12 +82,12 @@ function App() {
       />
 
       <ProjectList
-        projects={projects.filter((p) =>
-        p.title.toLowerCase().includes(search.toLowerCase())
-        )}
-        onDelete={handleDelete}
-        onUpdateStatus={handleUpdateStatus}
-      />
+  projects={projects.filter((p) =>
+    p.title.toLowerCase().includes(search.toLowerCase())
+  )}
+  onDelete={handleDelete}
+  onUpdateStatus={handleUpdateStatus}
+/>
     </div>
   );
 }

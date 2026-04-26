@@ -1,6 +1,6 @@
 import ProjectItem from "./ProjectItem";
 
-function ProjectList({ projects, onDelete }) {
+function ProjectList({ projects, onDelete, onUpdateStatus }) {
   return (
     <ul>
       {projects.map((project) => (
@@ -8,6 +8,7 @@ function ProjectList({ projects, onDelete }) {
           key={project._id}
           project={project}
           onDelete={onDelete}
+          onUpdateStatus={onUpdateStatus}
         />
       ))}
     </ul>

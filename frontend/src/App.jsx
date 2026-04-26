@@ -53,6 +53,18 @@ function App() {
       .catch((err) => console.error(err));
   };
 
+  const handleUpdateStatus = (id, status) => {
+  fetch(`http://localhost:5000/api/projects/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  })
+    .then(() => fetchProjects())
+    .catch(() => setError("Failed to update project"));
+};
+
   return (
     <div>
       <h1>Projects</h1>
@@ -71,9 +83,10 @@ function App() {
 
       <ProjectList
         projects={projects.filter((p) =>
-          p.title.toLowerCase().includes(search.toLowerCase())
+        p.title.toLowerCase().includes(search.toLowerCase())
         )}
         onDelete={handleDelete}
+        onUpdateStatus={handleUpdateStatus}
       />
     </div>
   );

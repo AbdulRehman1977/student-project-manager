@@ -1,0 +1,75 @@
+import Project from "../models/projectModel.js";
+import Task from "../models/taskModel.js";
+
+
+
+
+//Get /api/projects
+export const getProjects = async (req, res) => {
+    try {
+        const projects = await Project.find().populate("courseId");
+        res.json(projects);
+    }   catch (error) {
+        res.status(500).json({message: "Failed to fetch projects" });
+    }
+};
+
+
+// POST /api/projects
+export const createProject = async (req,res) => {
+    try {
+        const { title, deadline, estimatedHours, status, courseId } = req.body;
+    
+        if (!title || !courseId) {
+        return res.status(400).json({ message: "Title and courseId are required" });
+        }
+
+        const project = await Project.create({
+            title,
+            deadline,
+            estimatedHours,
+            status,
+            courseId,
+        });
+
+        res.status(201).json(project);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to create project" });
+      }
+};
+
+// PUT /api/projects/:id
+export const updateProject = async (req, res) => {
+    try {
+        const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        res.json(project);
+    } catch (error) {
+        res.status(400).json({ message: "Failed to update project" });
+    }
+};
+
+// DELETE /api/projects/:id
+export const deleteProject = async (req, res) => {
+    try {
+        const project = await Project.findByIdAndDelete(req.params.id);
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        await Task.deleteMany({ projectId: req.params.id });
+
+        res.json({ message: "Project and related tasks deleted" });
+
+    } catch (error) {
+        res.status(500).json({ message: "Failed to delete project" });
+    }
+};

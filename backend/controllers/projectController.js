@@ -83,3 +83,22 @@ export const deleteProject = async (req, res) => {
         res.status(500).json({ message: "Failed to delete project" });
     }
 };
+
+// GET /api/projects/stats/summary
+export const getProjectStats = async (req, res) => {
+  try {
+    const totalProjects = await Project.countDocuments();
+    const completedProjects = await Project.countDocuments({ status: "done" });
+    const inProgressProjects = await Project.countDocuments({ status: "in progress" });
+    const notStartedProjects = await Project.countDocuments({ status: "not started" });
+
+    res.json({
+      totalProjects,
+      completedProjects,
+      inProgressProjects,
+      notStartedProjects,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch project statistics" });
+  }
+};

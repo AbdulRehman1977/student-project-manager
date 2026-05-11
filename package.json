@@ -1,0 +1,24 @@
+{
+  "name": "student-project",
+  "version": "1.0.0",
+  "description": "A web application that helps students manage courses, projects, and tasks with deadlines and progress tracking.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdulRehman1977/student-project-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AbdulRehman1977/student-project-manager/issues"
+  },
+  "homepage": "https://github.com/AbdulRehman1977/student-project-manager#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

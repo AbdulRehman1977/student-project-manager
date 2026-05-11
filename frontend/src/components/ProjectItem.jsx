@@ -39,7 +39,7 @@ function ProjectItem({ project, onDelete, onUpdateStatus }) {
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
         </select>
-        <button className="delete-btn" onClick={() => onDelete(project._id)}>
+        <button className="delete-btn" onClick={() => { if (window.confirm(`Delete "${project.title}"?`)) onDelete(project._id); }}>
           Delete
         </button>
       </div>

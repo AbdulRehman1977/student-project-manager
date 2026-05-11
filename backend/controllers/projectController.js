@@ -30,8 +30,8 @@ export const createProject = async (req,res) => {
     try {
         const { title, deadline, estimatedHours, status, courseId } = req.body;
     
-        if (!title || !courseId) {
-        return res.status(400).json({ message: "Title and courseId are required" });
+        if (!title) {
+        return res.status(400).json({ message: "Title is required" });
         }
 
         const project = await Project.create({

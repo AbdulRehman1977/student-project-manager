@@ -50,6 +50,19 @@ export const createProject = async (req,res) => {
 
 // PUT /api/projects/:id
 export const updateProject = async (req, res) => {
+    const { title, status, estimatedHours } = req.body;
+
+    const validStatuses = ["not started", "in progress", "done"];
+    if (status !== undefined && !validStatuses.includes(status)) {
+        return res.status(400).json({ message: "Invalid status value" });
+    }
+    if (title !== undefined && title.trim().length < 2) {
+        return res.status(400).json({ message: "Title must be at least 2 characters" });
+    }
+    if (estimatedHours !== undefined && (estimatedHours < 0 || estimatedHours > 500)) {
+        return res.status(400).json({ message: "Estimated hours must be between 0 and 500" });
+    }
+
     try {
         const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
             new: true,

@@ -16,7 +16,6 @@ function ProjectItem({ project, onDelete, onUpdateStatus }) {
       </div>
 
       <div className="project-meta">
-        {project.courseId && <span>Course: {project.courseId.title}</span>}
         {project.estimatedHours > 0 && <span>{project.estimatedHours}h estimated</span>}
         {deadline && (
           <span>Due {deadline.toLocaleDateString()}</span>

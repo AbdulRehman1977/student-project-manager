@@ -30,31 +30,31 @@ const projects = await Project.insertMany([
 
 await Task.insertMany([
   // Fullstack Lab Submission
-  { title: "Create backend folder structure", completed: true, dueDate: "2026-04-27", projectId: projects[0]._id },
-  { title: "Implement project CRUD API", completed: true, dueDate: "2026-04-28", projectId: projects[0]._id },
-  { title: "Build React project form", completed: true, dueDate: "2026-04-29", projectId: projects[0]._id },
-  { title: "Connect frontend to backend API", completed: false, dueDate: "2026-05-05", projectId: projects[0]._id },
-  { title: "Write README and setup instructions", completed: false, dueDate: "2026-05-08", projectId: projects[0]._id },
+  { title: "Create backend folder structure", completed: true, projectId: projects[0]._id },
+  { title: "Implement project CRUD API", completed: true, projectId: projects[0]._id },
+  { title: "Build React project form", completed: true, projectId: projects[0]._id },
+  { title: "Connect frontend to backend API", completed: false, projectId: projects[0]._id },
+  { title: "Write README and setup instructions", completed: false, projectId: projects[0]._id },
 
   // ERD Database Report
-  { title: "Draw ERD diagram", completed: false, dueDate: "2026-05-01", projectId: projects[1]._id },
-  { title: "Write database relationship explanation", completed: false, dueDate: "2026-05-02", projectId: projects[1]._id },
-  { title: "Document normalization decisions", completed: false, dueDate: "2026-05-03", projectId: projects[1]._id },
+  { title: "Draw ERD diagram", completed: false, projectId: projects[1]._id },
+  { title: "Write database relationship explanation", completed: false, projectId: projects[1]._id },
+  { title: "Document normalization decisions", completed: false, projectId: projects[1]._id },
 
   // Agile Reflection Essay
-  { title: "Read assigned agile literature", completed: true, dueDate: "2026-05-05", projectId: projects[2]._id },
-  { title: "Write first draft of reflection", completed: false, dueDate: "2026-05-10", projectId: projects[2]._id },
-  { title: "Revise and submit final essay", completed: false, dueDate: "2026-05-14", projectId: projects[2]._id },
+  { title: "Read assigned agile literature", completed: true, projectId: projects[2]._id },
+  { title: "Write first draft of reflection", completed: false, projectId: projects[2]._id },
+  { title: "Revise and submit final essay", completed: false, projectId: projects[2]._id },
 
   // Security Risk Analysis
-  { title: "Identify assets and threats", completed: true, dueDate: "2026-05-10", projectId: projects[3]._id },
-  { title: "Perform risk assessment matrix", completed: false, dueDate: "2026-05-14", projectId: projects[3]._id },
-  { title: "Write mitigation recommendations", completed: false, dueDate: "2026-05-18", projectId: projects[3]._id },
+  { title: "Identify assets and threats", completed: true, projectId: projects[3]._id },
+  { title: "Perform risk assessment matrix", completed: false, projectId: projects[3]._id },
+  { title: "Write mitigation recommendations", completed: false, projectId: projects[3]._id },
 
   // Usability Test Prototype
-  { title: "Create low-fidelity wireframes", completed: false, dueDate: "2026-05-15", projectId: projects[4]._id },
-  { title: "Build clickable Figma prototype", completed: false, dueDate: "2026-05-19", projectId: projects[4]._id },
-  { title: "Conduct usability test with 3 users", completed: false, dueDate: "2026-05-23", projectId: projects[4]._id },
+  { title: "Create low-fidelity wireframes", completed: false, projectId: projects[4]._id },
+  { title: "Build clickable Figma prototype", completed: false, projectId: projects[4]._id },
+  { title: "Conduct usability test with 3 users", completed: false, projectId: projects[4]._id },
 ]);
 
 console.log("Seed data inserted");

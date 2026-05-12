@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/projects", projectRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/tasks", taskRoutes);
 
 
 //test route

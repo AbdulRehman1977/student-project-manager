@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ProjectList from "./components/ProjectList";
 import ProjectForm from "./components/ProjectForm";
-import StatsBar from "./components/StatsBar";
 
 function App() {
   const [projects, setProjects] = useState([]);
-  const [stats, setStats] = useState(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,20 +27,9 @@ function App() {
       });
   };
 
-  const fetchStats = () => {
-    fetch("http://localhost:5000/api/projects/stats/summary")
-      .then((res) => res.json())
-      .then(setStats)
-      .catch(() => {});
-  };
-
   useEffect(() => {
     fetchProjects();
-    fetchStats();
-    const interval = setInterval(() => {
-      fetchProjects();
-      fetchStats();
-    }, 30000);
+    const interval = setInterval(fetchProjects, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -55,17 +42,13 @@ function App() {
       .then((res) => {
         if (!res.ok) throw new Error();
         fetchProjects();
-        fetchStats();
       })
       .catch(() => setError("Failed to create project"));
   };
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/api/projects/${id}`, { method: "DELETE" })
-      .then(() => {
-        fetchProjects();
-        fetchStats();
-      })
+      .then(fetchProjects)
       .catch(() => setError("Failed to delete project"));
   };
 
@@ -75,10 +58,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
     })
-      .then(() => {
-        fetchProjects();
-        fetchStats();
-      })
+      .then(fetchProjects)
       .catch(() => setError("Failed to update project"));
   };
 
@@ -89,8 +69,6 @@ function App() {
   return (
     <div className="app">
       <h1>Project Tracker</h1>
-
-      <StatsBar stats={stats} />
 
       {error && <div className="error-banner">{error}</div>}
 

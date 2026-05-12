@@ -1,14 +1,13 @@
+import { useState } from "react";
+import TaskList from "./TaskList";
+
 function ProjectItem({ project, onDelete, onUpdateStatus }) {
-  const today = new Date();
+  const [showTasks, setShowTasks] = useState(false);
+
   const deadline = project.deadline ? new Date(project.deadline) : null;
-  const daysLeft = deadline
-    ? Math.ceil((deadline - today) / (1000 * 60 * 60 * 24))
-    : null;
-  const dueSoon = daysLeft !== null && daysLeft <= 7 && daysLeft >= 0 && project.status !== "done";
-  const overdue = daysLeft !== null && daysLeft < 0 && project.status !== "done";
 
   return (
-    <li className={`project-card ${dueSoon ? "due-soon" : ""} ${overdue ? "overdue" : ""}`}>
+    <li className="project-card">
       <div className="project-header">
         <strong className="project-title">{project.title}</strong>
         <span className={`status-badge status-${project.status.replace(" ", "-")}`}>
@@ -20,13 +19,7 @@ function ProjectItem({ project, onDelete, onUpdateStatus }) {
         {project.courseId && <span>Course: {project.courseId.title}</span>}
         {project.estimatedHours > 0 && <span>{project.estimatedHours}h estimated</span>}
         {deadline && (
-          <span className={overdue ? "text-overdue" : dueSoon ? "text-due-soon" : ""}>
-            {overdue
-              ? `Overdue by ${Math.abs(daysLeft)} day${Math.abs(daysLeft) !== 1 ? "s" : ""}`
-              : daysLeft === 0
-              ? "Due today"
-              : `Due ${deadline.toLocaleDateString()}`}
-          </span>
+          <span>Due {deadline.toLocaleDateString()}</span>
         )}
       </div>
 
@@ -39,10 +32,18 @@ function ProjectItem({ project, onDelete, onUpdateStatus }) {
           <option value="in progress">In progress</option>
           <option value="done">Done</option>
         </select>
+        <button
+          className="tasks-btn"
+          onClick={() => setShowTasks((prev) => !prev)}
+        >
+          {showTasks ? "Hide tasks" : "Show tasks"}
+        </button>
         <button className="delete-btn" onClick={() => { if (window.confirm(`Delete "${project.title}"?`)) onDelete(project._id); }}>
           Delete
         </button>
       </div>
+
+      {showTasks && <TaskList projectId={project._id} />}
     </li>
   );
 }
